@@ -11,14 +11,6 @@ const hasFirebase = typeof firebase !== 'undefined' && firebase.apps;
 const app = hasFirebase && firebase.apps.length ? firebase.app() : (hasFirebase ? firebase.initializeApp(firebaseConfig) : null);
 const db = app ? firebase.firestore() : null;
 
-const defaultSite = {
-  title: 'Oyunu sadece oynama, evrenin içine gir.',
-  subtitle: 'AFK Games Studio; mobil, PC ve topluluk odaklı oyun projeleri geliştiren dinamik bir oyun ekibidir. Amacımız, güçlü atmosferi, okunaklı arayüzleri, sürükleyici oynanışı ve oyuncu geri bildirimlerini merkeze alan profesyonel oyun deneyimleri üretmektir.',
-  email: 'afkgamesstudio@gmail.com',
-  phone: '+90 537 148 26 93',
-  about: 'AFK Games Studio; mobil, PC ve topluluk odaklı oyun projeleri geliştiren dinamik bir oyun ekibidir. Amacımız, güçlü atmosferi, okunaklı arayüzleri, sürükleyici oynanışı ve oyuncu geri bildirimlerini merkeze alan profesyonel oyun deneyimleri üretmektir.'
-};
-
 const teamMembers = [
   { name: 'Mustafa Gürkan Çifcioğlu', role: 'Productor', note: 'Proje planlama, görev dağılımı ve süreç takibi.' },
   { name: 'Özcan Tezcan', role: 'Productor', note: 'Üretim hattı ve ekip organizasyonu.' },
@@ -222,7 +214,6 @@ function resetNewsForm() {
 function setupForms() {
   const gameForm = document.getElementById('game-form');
   const newsForm = document.getElementById('news-form');
-  const siteForm = document.getElementById('site-form');
 
   if (gameForm && db) {
     gameForm.addEventListener('submit', (e) => {
@@ -268,28 +259,6 @@ function setupForms() {
     });
   }
 
-  if (siteForm) {
-    siteForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const data = {
-        title: document.getElementById('site-title').value.trim() || defaultSite.title,
-        subtitle: document.getElementById('site-subtitle').value.trim() || defaultSite.subtitle,
-        email: document.getElementById('site-email').value.trim() || defaultSite.email,
-        phone: document.getElementById('site-phone').value.trim() || defaultSite.phone,
-        about: document.getElementById('site-about').value.trim() || defaultSite.about
-      };
-      if (db) {
-        db.collection('site').doc('main').set(data, { merge: true })
-          .then(() => { renderSiteContent(data); alert('Site içeriği kaydedildi.'); })
-          .catch(error => { console.error('Site save failed:', error); alert('Site içeriği kaydedilemedi. Firestore kurallarını kontrol edin.'); });
-      } else {
-        localStorage.setItem('afk-site', JSON.stringify(data));
-        renderSiteContent(data);
-        alert('Site içeriği kaydedildi.');
-      }
-    });
-  }
-
   document.getElementById('cancel-game-edit')?.addEventListener('click', resetGameForm);
   document.getElementById('cancel-news-edit')?.addEventListener('click', resetNewsForm);
   document.getElementById('game-filter')?.addEventListener('input', renderAdminLists);
@@ -326,27 +295,13 @@ function initAdminGate() {
   });
 }
 
-function renderSiteContent(data = null) {
-  const site = data || (db ? null : JSON.parse(localStorage.getItem('afk-site') || 'null')) || defaultSite;
-  document.getElementById('site-title-preview')?.replaceChildren(document.createTextNode(site.title));
-  document.getElementById('site-subtitle-preview')?.replaceChildren(document.createTextNode(site.subtitle));
-  document.getElementById('site-email-preview')?.replaceChildren(document.createTextNode(site.email));
-  document.getElementById('site-phone-preview')?.replaceChildren(document.createTextNode(site.phone));
-  document.getElementById('site-about-preview')?.replaceChildren(document.createTextNode(site.about));
-}
-
 function renderPageContent() {
   if (db) {
     getItemsFromDb('games').then(items => renderCards('games-list', items, 'game'));
     getItemsFromDb('news').then(items => renderCards('news-list', items, 'news'));
-    db.collection('site').doc('main').get().then(snapshot => {
-      const site = snapshot.exists ? snapshot.data() : null;
-      if (site) renderSiteContent(site);
-    }).catch(() => renderSiteContent(defaultSite));
   } else {
     renderCards('games-list', [], 'game');
     renderCards('news-list', [], 'news');
-    renderSiteContent();
   }
 }
 
