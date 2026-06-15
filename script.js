@@ -55,18 +55,23 @@ const localNews = [
 ];
 
 const defaultSite = {
-  title: 'Yeni nesil oyun deneyimleri için güçlü bir stüdyo.',
-  subtitle: 'Oyunlarımız, haberlerimiz ve iletişim bilgilerimiz tek sayfada birleşti.',
-  email: 'hello@afkgamesstudio.com',
-  phone: '+90 555 123 45 67',
-  about: 'AFK Games Studio; yaratıcı fikirler, güçlü ekip çalışması ve oyuncu odaklı tasarımla büyüyen bir oyun stüdyosudur.'
+  title: 'AFK Games Studio, oyun dünyasına yeni projeler kazandıran bağımsız ekip.',
+  subtitle: 'Fikirden prototipe, tasarımdan topluluğa kadar planlı ve oyuncu odaklı üretim süreci.',
+  email: 'afkgamesstudio@gmail.com',
+  phone: '+90 537 148 26 93',
+  about: 'AFK Games Studio; oyun geliştirme, görsel tasarım, üretim planlama ve topluluk yönetimi alanlarında çalışan bir ekip yapısıyla oyun dünyasına yeni projeler kazandırmayı hedefleyen bağımsız bir stüdyodur. Her projede oyuncunun deneyimini merkeze alır, okunabilir arayüzler, güçlü mekanikler ve sürdürülebilir üretim süreciyle gelişim sağlar.'
 };
 
 const teamMembers = [
-  { name: 'Eren', role: 'Kurucu / Yönetici', note: 'Stüdyo vizyonu ve proje planlaması.' },
-  { name: 'Mira', role: 'Game Designer', note: 'Dünya tasarımı ve oyuncu akışı.' },
-  { name: 'Aylin', role: 'Grafik & UI', note: 'Karakterler, arayüz ve görsel stil.' },
-  { name: 'Can', role: 'Teknoloji & Backend', note: 'Firebase, sistemler ve oyun altyapısı.' }
+  { name: 'Mustafa Gürkan Çifcioğlu', role: 'Productor', note: 'Proje planlama, görev dağılımı ve süreç takibi.' },
+  { name: 'Özcan Tezcan', role: 'Productor', note: 'Üretim hattı ve ekip organizasyonu.' },
+  { name: 'Abdulkadir Çolak', role: 'Coordinator', note: 'Ekip içi iletişim, toplantı düzeni ve koordinasyon akışı.' },
+  { name: 'Alim Erva Irmak', role: 'Developer', note: 'Oyun mekanikleri ve yazılım altyapısı.' },
+  { name: 'Batuhan Özcan', role: 'Developer', note: 'Performans, hata giderme ve oynanabilir sistemler.' },
+  { name: 'Nazım Kadir Can', role: 'Developer', note: 'Teknoloji altyapısı ve proje geliştirme.' },
+  { name: 'Aykut Kılıç', role: 'Designer', note: 'Görsel kimlik ve karakter/harita tasarımı.' },
+  { name: 'Furkan Çifcioğlu', role: 'Designer', note: 'Arayüz ve oyuncu deneyimi tasarımı.' },
+  { name: 'İbrahim Kerim Kaplan', role: 'Designer', note: 'Görsel bütünlük ve tasarım yönü.' }
 ];
 
 const demoGames = localGames;

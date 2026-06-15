@@ -25,21 +25,44 @@
     </nav>
   </header>
 
-  <main class="container page-section">
-    <section id="admin-lock" class="card admin-lock-card">
-      <p class="eyebrow">Erişim korumalı</p>
-      <h1>Admin paneline giriş</h1>
-      <p>Devam etmek için şifreyi girin.</p>
+  <main class="container page-section admin-shell">
+    <section id="admin-lock" class="card admin-lock-card admin-hero">
+      <div class="admin-badge-row">
+        <span class="admin-badge">Erişim korumalı</span>
+        <span class="admin-badge soft">AFK Games Studio</span>
+      </div>
+      <h1>Admin Panel</h1>
+      <div class="admin-chip-grid">
+        <span class="admin-chip">⚡ Hızlı erişim</span>
+        <span class="admin-chip">🧩 Oyun & haber yönetimi</span>
+        <span class="admin-chip">🎯 Site metni düzenleme</span>
+      </div>
       <div class="admin-password-box">
-        <input id="admin-password" type="password" placeholder="Şifre" />
+        <input id="admin-password" type="password" placeholder="Şifreyi girin" />
         <button id="unlock-admin" class="btn btn-primary" type="button">Giriş Yap</button>
       </div>
       <p id="admin-error" class="hint" hidden>Şifre yanlış. Lütfen tekrar deneyin.</p>
     </section>
 
-    <section id="admin-content" hidden class="grid admin-grid">
-      <article class="card">
-        <h2>Oyun Yönetimi</h2>
+    <section id="admin-content" hidden class="admin-dashboard">
+      <article class="card admin-panel-card admin-summary-card">
+        <p class="eyebrow">Kontrol Paneli</p>
+        <h2>AFK Games Yönetim Merkezi</h2>
+        <div class="admin-stat-grid">
+          <div class="stat-box"><strong>3</strong><span>Yönetim bölümü</span></div>
+          <div class="stat-box"><strong>Live</strong><span>Canlı içerik güncellemesi</span></div>
+          <div class="stat-box"><strong>Fast</strong><span>Kolay filtreleme ve düzenleme</span></div>
+        </div>
+      </article>
+
+      <article class="card admin-panel-card">
+        <div class="admin-card-header">
+          <div>
+            <p class="eyebrow">Oyunlar</p>
+            <h2>Oyun Yönetimi</h2>
+          </div>
+          <span class="admin-pill">CRUD</span>
+        </div>
         <form id="game-form" class="admin-form">
           <input type="text" id="game-title" placeholder="Oyun adı" required />
           <input type="text" id="game-tag" placeholder="Tür / Etiket" required />
@@ -60,8 +83,14 @@
         <div id="game-list" class="mini-list"></div>
       </article>
 
-      <article class="card">
-        <h2>Haber Yönetimi</h2>
+      <article class="card admin-panel-card">
+        <div class="admin-card-header">
+          <div>
+            <p class="eyebrow">Haberler</p>
+            <h2>Haber Yönetimi</h2>
+          </div>
+          <span class="admin-pill soft">Aktif</span>
+        </div>
         <form id="news-form" class="admin-form">
           <input type="text" id="news-title" placeholder="Haber başlığı" required />
           <input type="text" id="news-category" placeholder="Kategori (örn. Güncelleme)" required />
@@ -82,8 +111,14 @@
         <div id="news-admin-list" class="mini-list"></div>
       </article>
 
-      <article class="card full-width-card">
-        <h2>Site İçeriği</h2>
+      <article class="card admin-panel-card full-width-card">
+        <div class="admin-card-header">
+          <div>
+            <p class="eyebrow">Site</p>
+            <h2>Site İçeriği</h2>
+          </div>
+          <span class="admin-pill">Düzenle</span>
+        </div>
         <form id="site-form" class="admin-form two-cols">
           <input type="text" id="site-title" placeholder="Ana başlık" />
           <input type="text" id="site-subtitle" placeholder="Alt metin" />

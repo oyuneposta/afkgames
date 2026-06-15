@@ -77,11 +77,30 @@ p { color: var(--muted); line-height: 1.6; }
 .grid { display: grid; gap: 1rem; }
 .cards-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .admin-grid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+.admin-shell { display: grid; gap: 1rem; }
+.admin-hero { border: 1px solid rgba(124, 92, 255, 0.25); background: linear-gradient(135deg, rgba(15, 27, 44, 0.98), rgba(19, 38, 59, 0.98)); box-shadow: 0 22px 40px rgba(10, 15, 28, 0.45); }
+.admin-badge-row, .admin-chip-grid, .admin-stat-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.admin-badge, .admin-pill, .admin-chip { display: inline-flex; align-items: center; border-radius: 999px; padding: 0.35rem 0.6rem; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.admin-badge { background: rgba(124, 92, 255, 0.14); color: #d7ccff; border: 1px solid rgba(124, 92, 255, 0.25); }
+.admin-badge.soft, .admin-pill.soft { background: rgba(24, 210, 196, 0.12); color: #aef7ef; border-color: rgba(24, 210, 196, 0.22); }
+.admin-pill { background: rgba(255,255,255,0.06); color: #fff; border: 1px solid rgba(255,255,255,0.08); }
+.admin-chip { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid rgba(255,255,255,0.08); }
+.admin-lead { max-width: 62ch; }
+.admin-dashboard { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+.admin-panel-card { min-height: 100%; }
+.admin-summary-card { grid-column: 1 / -1; }
+.admin-card-header { display: flex; justify-content: space-between; align-items: center; gap: 0.8rem; margin-bottom: 0.6rem; }
+.admin-stat-grid { margin-top: 1rem; }
+.stat-box { flex: 1 1 180px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 0.85rem; }
+.stat-box strong { display: block; font-size: 1.05rem; color: #fff; }
+.stat-box span { color: var(--muted); font-size: 0.92rem; }
 .admin-form { display: grid; gap: 0.75rem; }
-.admin-form input, .admin-form textarea { width: 100%; border-radius: 14px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); color: #fff; padding: 0.75rem 0.9rem; font: inherit; }
+.admin-form input, .admin-form select, .admin-form textarea { width: 100%; border-radius: 14px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); color: #fff; padding: 0.75rem 0.9rem; font: inherit; }
+.admin-form textarea { min-height: 96px; resize: vertical; }
+.admin-form input::placeholder, .admin-form textarea::placeholder { color: #9fb5d0; }
 .admin-form textarea { min-height: 90px; resize: vertical; }
 .mini-list { display: grid; gap: 0.5rem; margin-top: 1rem; }
-.mini-item { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; padding: 0.65rem 0.75rem; background: rgba(255,255,255,0.04); border-radius: 14px; }
+.mini-item { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; padding: 0.75rem; background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03)); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; }
 .mini-meta { color: var(--muted); font-size: 0.9rem; margin: 0.1rem 0 0; }
 .mini-actions { display: flex; gap: 0.35rem; flex-wrap: wrap; }
 .form-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
@@ -95,6 +114,10 @@ p { color: var(--muted); line-height: 1.6; }
 .admin-password-box input { flex: 1 1 240px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); color: #fff; padding: 0.75rem 0.9rem; font: inherit; }
 .hint { color: #ffd76e; }
 .site-footer { border-top: 1px solid rgba(255,255,255,0.08); background: rgba(4, 8, 17, 0.92); }
+:root.light .admin-hero { background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(237, 243, 255, 0.98)); border-color: rgba(107, 91, 255, 0.18); }
+:root.light .admin-chip, :root.light .admin-pill, :root.light .stat-box, :root.light .mini-item { background: rgba(16, 32, 56, 0.04); border-color: rgba(16, 32, 56, 0.08); color: #102038; }
+:root.light .admin-form input, :root.light .admin-form select, :root.light .admin-form textarea { background: rgba(16, 32, 56, 0.04); color: #102038; border-color: rgba(16, 32, 56, 0.12); }
+:root.light .admin-form input::placeholder, :root.light .admin-form textarea::placeholder { color: #5b718d; }
 
 @media (max-width: 880px) {
   .nav-links { display: none; position: absolute; right: 1rem; top: 3.6rem; flex-direction: column; align-items: stretch; padding: 0.75rem; border-radius: 18px; background: rgba(7,17,31,0.98); border: 1px solid rgba(255,255,255,0.08); }
