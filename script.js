@@ -12,11 +12,11 @@ const app = hasFirebase && firebase.apps.length ? firebase.app() : (hasFirebase 
 const db = app ? firebase.firestore() : null;
 
 const defaultSite = {
-  title: 'AFK Games Studio, oyun dünyasına yeni projeler kazandıran bağımsız ekip.',
-  subtitle: 'Fikirden prototipe, tasarımdan topluluğa kadar planlı ve oyuncu odaklı üretim süreci.',
+  title: 'Oyunu sadece oynama, evrenin içine gir.',
+  subtitle: 'AFK Games Studio; mobil, PC ve topluluk odaklı oyun projeleri geliştiren dinamik bir oyun ekibidir. Amacımız, güçlü atmosferi, okunaklı arayüzleri, sürükleyici oynanışı ve oyuncu geri bildirimlerini merkeze alan profesyonel oyun deneyimleri üretmektir.',
   email: 'afkgamesstudio@gmail.com',
   phone: '+90 537 148 26 93',
-  about: 'AFK Games Studio; oyun geliştirme, görsel tasarım, üretim planlama ve topluluk yönetimi alanlarında çalışan bir ekip yapısıyla oyun dünyasına yeni projeler kazandırmayı hedefleyen bağımsız bir stüdyodur. Her projede oyuncunun deneyimini merkeze alır, okunabilir arayüzler, güçlü mekanikler ve sürdürülebilir üretim süreciyle gelişim sağlar.'
+  about: 'AFK Games Studio; mobil, PC ve topluluk odaklı oyun projeleri geliştiren dinamik bir oyun ekibidir. Amacımız, güçlü atmosferi, okunaklı arayüzleri, sürükleyici oynanışı ve oyuncu geri bildirimlerini merkeze alan profesyonel oyun deneyimleri üretmektir.'
 };
 
 const teamMembers = [
