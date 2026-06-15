@@ -64,10 +64,16 @@ function renderTeamCards() {
 
   container.innerHTML = teamMembers.map(member => `
     <article class="member-card card">
-      <div class="avatar">${member.name.charAt(0)}</div>
-      <h3>${member.name}</h3>
-      <p class="member-role">${member.role}</p>
-      <p>${member.note}</p>
+      <div class="member-top">
+        <div class="avatar">${member.name.charAt(0)}</div>
+        <div>
+          <span class="member-chip">${member.role}</span>
+          <h3>${member.name}</h3>
+        </div>
+      </div>
+      <p class="member-role">${member.role} alanı</p>
+      <p class="member-note">${member.note}</p>
+      <span class="member-tag">AFK Games Studio</span>
     </article>
   `).join('');
 }
@@ -84,9 +90,15 @@ function renderAdminLists() {
   const newsList = document.getElementById('news-admin-list');
   const gameFilter = document.getElementById('game-filter');
   const newsFilter = document.getElementById('news-filter');
+  const gameStatusFilter = document.getElementById('game-status-filter');
+  const newsStatusFilter = document.getElementById('news-status-filter');
 
   getItemsFromDb('games').then(items => {
-    const filtered = (items || []).filter(item => (item.title || '').toLowerCase().includes((gameFilter?.value || '').toLowerCase()));
+    const filtered = (items || []).filter(item => {
+      const matchesText = (item.title || '').toLowerCase().includes((gameFilter?.value || '').toLowerCase());
+      const matchesStatus = !gameStatusFilter || gameStatusFilter.value === 'all' || item.status === gameStatusFilter.value;
+      return matchesText && matchesStatus;
+    });
     if (gameList) {
       gameList.innerHTML = filtered.length ? filtered.map(item => `
         <article class="mini-item">
@@ -101,10 +113,22 @@ function renderAdminLists() {
         </article>
       `).join('') : '<p>Henüz oyun yok.</p>';
     }
+    const statGames = document.getElementById('stat-games');
+    if (statGames) statGames.textContent = String(items.length || 0);
+    const statStatus = document.getElementById('stat-status');
+    if (statStatus) {
+      const published = (items || []).filter(item => item.status === 'published').length;
+      const draft = (items || []).filter(item => item.status === 'draft').length;
+      statStatus.textContent = `${published} / ${draft}`;
+    }
   });
 
   getItemsFromDb('news').then(items => {
-    const filtered = (items || []).filter(item => (item.title || '').toLowerCase().includes((newsFilter?.value || '').toLowerCase()));
+    const filtered = (items || []).filter(item => {
+      const matchesText = (item.title || '').toLowerCase().includes((newsFilter?.value || '').toLowerCase());
+      const matchesStatus = !newsStatusFilter || newsStatusFilter.value === 'all' || item.status === newsStatusFilter.value;
+      return matchesText && matchesStatus;
+    });
     if (newsList) {
       newsList.innerHTML = filtered.length ? filtered.map(item => `
         <article class="mini-item">
@@ -118,6 +142,13 @@ function renderAdminLists() {
           </div>
         </article>
       `).join('') : '<p>Henüz haber yok.</p>';
+    }
+    const statNews = document.getElementById('stat-news');
+    if (statNews) statNews.textContent = String((items || []).filter(item => item.status === 'published').length || 0);
+    const statLatest = document.getElementById('stat-latest');
+    if (statLatest) {
+      const latest = (items || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''))[0];
+      statLatest.textContent = latest?.date || '—';
     }
   });
 }
@@ -263,6 +294,8 @@ function setupForms() {
   document.getElementById('cancel-news-edit')?.addEventListener('click', resetNewsForm);
   document.getElementById('game-filter')?.addEventListener('input', renderAdminLists);
   document.getElementById('news-filter')?.addEventListener('input', renderAdminLists);
+  document.getElementById('game-status-filter')?.addEventListener('change', renderAdminLists);
+  document.getElementById('news-status-filter')?.addEventListener('change', renderAdminLists);
 }
 
 function initAdminGate() {

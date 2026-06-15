@@ -49,9 +49,10 @@
         <p class="eyebrow">Kontrol Paneli</p>
         <h2>AFK Games Yönetim Merkezi</h2>
         <div class="admin-stat-grid">
-          <div class="stat-box"><strong>3</strong><span>Yönetim bölümü</span></div>
-          <div class="stat-box"><strong>Live</strong><span>Canlı içerik güncellemesi</span></div>
-          <div class="stat-box"><strong>Fast</strong><span>Kolay filtreleme ve düzenleme</span></div>
+          <div class="stat-box"><strong id="stat-games">0</strong><span>Toplam oyun</span></div>
+          <div class="stat-box"><strong id="stat-news">0</strong><span>Yayınlanmış haber</span></div>
+          <div class="stat-box"><strong id="stat-latest">-</strong><span>Son güncelleme</span></div>
+          <div class="stat-box"><strong id="stat-status">Live / Draft</strong><span>Durum dağılımı</span></div>
         </div>
       </article>
 
@@ -79,7 +80,14 @@
             <button type="button" id="cancel-game-edit" class="btn btn-secondary" hidden>İptal</button>
           </div>
         </form>
-        <input id="game-filter" class="filter-input" type="search" placeholder="Oyunlarda ara..." />
+        <div class="filter-row">
+          <input id="game-filter" class="filter-input" type="search" placeholder="Oyunlarda ara..." />
+          <select id="game-status-filter" class="filter-select">
+            <option value="all">Tüm durumlar</option>
+            <option value="published">Yayınlandı</option>
+            <option value="draft">Taslak</option>
+          </select>
+        </div>
         <div id="game-list" class="mini-list"></div>
       </article>
 
@@ -107,7 +115,14 @@
             <button type="button" id="cancel-news-edit" class="btn btn-secondary" hidden>İptal</button>
           </div>
         </form>
-        <input id="news-filter" class="filter-input" type="search" placeholder="Haberlarda ara..." />
+        <div class="filter-row">
+          <input id="news-filter" class="filter-input" type="search" placeholder="Haberlarda ara..." />
+          <select id="news-status-filter" class="filter-select">
+            <option value="all">Tüm durumlar</option>
+            <option value="published">Yayınlandı</option>
+            <option value="draft">Taslak</option>
+          </select>
+        </div>
         <div id="news-admin-list" class="mini-list"></div>
       </article>
 

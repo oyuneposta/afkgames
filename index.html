@@ -25,14 +25,16 @@
     </nav>
   </header>
 
-  <main class="container page-section">
-    <section class="hero card">
-      <p class="eyebrow">AFK Games Studio</p>
-      <h1 id="site-title-preview">AFK Games Studio, oyun dünyasına yeni projeler kazandıran bağımsız ekip.</h1>
-      <p id="site-subtitle-preview">Fikirden prototipe, tasarımdan topluluğa kadar planlı ve oyuncu odaklı üretim süreciyle büyüyoruz.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#games">Oyunlarımızı Keşfet</a>
-        <a class="btn btn-secondary" href="#news">Son Haberler</a>
+  <main class="container page-section home-shell">
+    <section class="hero card modern-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">AFK Games Studio</p>
+        <h1 id="site-title-preview">AFK Games Studio, oyun dünyasına yeni projeler kazandıran bağımsız ekip.</h1>
+        <p id="site-subtitle-preview">Fikirden prototipe, tasarımdan topluluğa kadar planlı ve oyuncu odaklı üretim süreciyle büyüyoruz.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#games">Oyunlarımızı Keşfet</a>
+          <a class="btn btn-secondary" href="#news">Son Haberler</a>
+        </div>
       </div>
     </section>
 
@@ -58,13 +60,13 @@
       <div class="grid cards-grid" id="news-list"></div>
     </section>
 
-    <section id="about" class="section-block grid cards-grid">
-      <article class="card about-panel">
+    <section id="about" class="section-block about-grid">
+      <article class="card about-panel feature-card">
         <p class="eyebrow">Hakkımızda</p>
         <h2>AFK Games Studio kimdir?</h2>
         <p id="site-about-preview">AFK Games Studio; oyun geliştirme, görsel tasarım, üretim planlama ve topluluk yönetimi alanlarında çalışan bir ekip yapısıyla oyun dünyasına yeni projeler kazandırmayı hedefleyen bağımsız bir stüdyodur. Her projede oyuncunun deneyimini merkeze alır, okunabilir arayüzler, güçlü mekanikler ve sürdürülebilir üretim süreciyle gelişim sağlar.</p>
       </article>
-      <article class="card about-panel">
+      <article class="card about-panel feature-card">
         <p class="eyebrow">Ekibimiz</p>
         <h2>Birlikte büyüyoruz</h2>
         <p>Productor, coordinator, developer ve designer ekipleriyle fikirden yayın sürecine kadar planlı bir üretim hattı kuruyoruz.</p>
@@ -77,26 +79,36 @@
           <p class="eyebrow">Ekibimiz</p>
           <h2>Kadro üyelerimiz</h2>
         </div>
-        <p class="section-note">Her alanın uzmanlarıyla çalışan, oyuncu odaklı bir yapı sunuyoruz.</p>
+        <p class="section-note">Her biri farklı uzmanlık alanında çalışan ekip üyelerimiz, proje boyunca tek bir vizyon etrafında çalışır.</p>
       </div>
-      <div class="grid cards-grid" id="team-list"></div>
+      <div class="grid cards-grid team-grid" id="team-list"></div>
     </section>
 
-    <section id="contact" class="section-block card contact-card">
-      <p class="eyebrow">İletişim</p>
-      <h2>Bizimle iletişime geçin</h2>
+    <section id="contact" class="section-block card contact-card modern-contact">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">İletişim</p>
+          <h2>Bizimle iletişime geçin</h2>
+        </div>
+        <p class="section-note">Bağlantılar, başvuru ve iletişim bilgileri sade bir kart düzeninde toplandı.</p>
+      </div>
       <div class="contact-grid">
         <article class="info-card">
           <h3>E-posta</h3>
-          <p id="site-email-preview">afkgamesstudio@gmail.com</p>
+          <p id="site-email-preview"><a href="mailto:afkgamesstudio@gmail.com">afkgamesstudio@gmail.com</a></p>
         </article>
         <article class="info-card">
           <h3>Telefon</h3>
-          <p id="site-phone-preview">+90 537 148 26 93</p>
+          <p id="site-phone-preview"><a href="tel:+905371482693">+90 537 148 26 93</a></p>
         </article>
         <article class="info-card">
           <h3>Bağlantılar</h3>
-          <p>Revolt · Başvuru Formu · YouTube</p>
+          <p>
+            <a href="https://app.revolt.chat/invite/9KcBArBF" target="_blank" rel="noopener noreferrer">Revolt</a> ·
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeLze82lkbmqj9kcDfmBuvQYM4XqrLiw9kk8AyIRvcaPMVoEw/alreadyresponded" target="_blank" rel="noopener noreferrer">Başvuru Formu</a> ·
+            <a href="https://www.youtube.com/@AfkGamesStudio/shorts" target="_blank" rel="noopener noreferrer">YouTube</a> ·
+            <a href="https://www.instagram.com/afkgamesstudio" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </p>
         </article>
       </div>
     </section>
@@ -105,7 +117,6 @@
   <footer class="site-footer">
     <div class="container footer-wrap">
       <p>© <span id="year"></span> AFK Games Studio. Tüm hakları saklıdır.</p>
-      <a href="admin.html">Admin Panel</a>
     </div>
   </footer>
 
