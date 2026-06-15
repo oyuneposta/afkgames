@@ -1,11 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFK Games • Yetkili</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AFK Games Studio | Admin Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    
+  <header class="site-header">
+    <nav class="container nav-wrap">
+      <span class="brand-spacer"></span>
+      <button class="menu-btn" aria-label="Menü">☰</button>
+      <div class="nav-links">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="games.html">Oyunlarımız</a>
+        <a href="news.html">Haberler</a>
+        <a href="about.html">Hakkımızda</a>
+        <a href="contact.html">İletişim</a>
+        <a href="admin.html" class="active">Admin</a>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Tema değiştir">🌙</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container page-section">
+    <section class="page-intro">
+      <p class="eyebrow">Admin Panel</p>
+      <h1>Oyun ve haber yönetimi</h1>
+      <p>Firebase Realtime Database’e bağlandığınızda buradan içerikleri ekleyip silebilirsiniz.</p>
+      <p class="hint">Firebase yapılandırmasını <strong>script.js</strong> içindeki <strong>firebaseConfig</strong> alanına ekleyin.</p>
+    </section>
+
+    <section class="grid admin-grid">
+      <article class="card">
+        <h2>Yeni Oyun Ekle</h2>
+        <form id="game-form" class="admin-form">
+          <input type="text" id="game-title" placeholder="Oyun adı" required />
+          <input type="text" id="game-tag" placeholder="Tür / Etiket" required />
+          <textarea id="game-desc" placeholder="Kısa açıklama" required></textarea>
+          <button type="submit" class="btn btn-primary">Ekle</button>
+        </form>
+        <div id="game-list" class="mini-list"></div>
+      </article>
+
+      <article class="card">
+        <h2>Yeni Haber Ekle</h2>
+        <form id="news-form" class="admin-form">
+          <input type="text" id="news-title" placeholder="Haber başlığı" required />
+          <input type="text" id="news-date" placeholder="Tarih (örn. 15 Haziran 2026)" required />
+          <textarea id="news-desc" placeholder="Haber içeriği" required></textarea>
+          <button type="submit" class="btn btn-primary">Ekle</button>
+        </form>
+        <div id="news-admin-list" class="mini-list"></div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>© <span id="year"></span> AFK Games Studio. Tüm hakları saklıdır.</p>
+      <a href="admin.html">Admin Panel</a>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AFK Games Studio | Ana Sayfa</title>
+  <title>AFK Games Studio | Hakkımızda</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -15,10 +15,10 @@
       <span class="brand-spacer"></span>
       <button class="menu-btn" aria-label="Menü">☰</button>
       <div class="nav-links">
-        <a href="index.html" class="active">Ana Sayfa</a>
+        <a href="index.html">Ana Sayfa</a>
         <a href="games.html">Oyunlarımız</a>
         <a href="news.html">Haberler</a>
-        <a href="about.html">Hakkımızda</a>
+        <a href="about.html" class="active">Hakkımızda</a>
         <a href="contact.html">İletişim</a>
         <a href="admin.html">Admin</a>
         <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Tema değiştir">🌙</button>
@@ -27,27 +27,28 @@
   </header>
 
   <main class="container page-section">
-    <section class="hero card">
-      <p class="eyebrow">AFK Games Studio</p>
-      <h1>Yeni nesil oyun deneyimleri için güçlü bir stüdyo.</h1>
-      <p>Oyunlarımız, haberlerimiz, hakkımızda ve iletişim sayfalarımızla AFK Games Studio’nun dijital yüzünü oluşturduk.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="games.html">Oyunlarımızı Keşfet</a>
-        <a class="btn btn-secondary" href="news.html">Son Haberler</a>
-      </div>
+    <section class="page-intro">
+      <p class="eyebrow">Biz kimiz?</p>
+      <h1>AFK Games Studio</h1>
+      <p>Yaratıcı fikirler, güçlü ekip çalışması ve oyuncu odaklı tasarımla büyüyen bir oyun stüdyosuyuz.</p>
+    </section>
+    <section class="grid cards-grid">
+      <article class="card about-card">
+        <h2>Misyonumuz</h2>
+        <p>Oyunculara unutulmaz anlar yaşatan, eğlenceli ve kaliteli oyunlar üretmek ve topluluğumuzu büyütmek.</p>
+      </article>
+      <article class="card about-card">
+        <h2>Ekibimiz</h2>
+        <p>Kreatif tasarım, oyun geliştirme ve topluluk yönetimi alanlarında çalışan bir ekibiz.</p>
+      </article>
     </section>
 
-    <section class="grid cards-grid">
-      <article class="card">
-        <h2>Oyunlarımız</h2>
-        <p>Çeşitli türlerde, oyuncu odaklı ve büyüleyici projelerimizi burada sunuyoruz.</p>
-        <a class="text-link" href="games.html">Görüntüle →</a>
-      </article>
-      <article class="card">
-        <h2>Haberler</h2>
-        <p>Yeni sürümler, etkinlikler ve stüdyo güncellemelerini takip edin.</p>
-        <a class="text-link" href="news.html">Takip et →</a>
-      </article>
+    <section class="card team-section">
+      <div class="section-heading">
+        <p class="eyebrow">Kadro</p>
+        <h2>Ekibimizden bir bakış</h2>
+      </div>
+      <div class="grid cards-grid" id="team-list"></div>
     </section>
   </main>
 
