@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AFK Games Studio | Haberler</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body id="top">
+  <header class="site-header">
+    <nav class="container nav-wrap">
+      <a class="brand-logo-link" href="index.html" aria-label="AFK Games Studio ana sayfa">
+        <img class="brand-logo" src="afk-logo.png" alt="AFK Games Studio logosu" />
+      </a>
+      <button class="menu-btn" aria-label="Menü">☰</button>
+      <div class="nav-links">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="index.html#games">Oyunlarımız</a>
+        <a href="news.html" class="active">Haberler</a>
+        <a href="index.html#contact">İletişim</a>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Tema değiştir">🌙</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container page-section home-shell">
+    <section class="hero card modern-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Haberler</p>
+        <h1>AFK Games Studio’dan son güncellemeler</h1>
+        <p>Projeler, sürümler, ekip gelişmeleri ve topluluk duyuruları burada paylaşılır.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="index.html#contact">İletişime Geç</a>
+          <a class="btn btn-secondary" href="index.html">Ana Sayfaya Dön</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Güncel</p>
+          <h2>Son haberler</h2>
+        </div>
+        <p class="section-note">Firebase üzerinden yönetilen haber kartları burada listelenir.</p>
+      </div>
+      <div class="grid cards-grid" id="news-list"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>© <span id="year"></span> AFK Games Studio. Tüm hakları saklıdır.</p>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
