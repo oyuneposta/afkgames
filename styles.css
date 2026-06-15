@@ -12,26 +12,29 @@
 
 :root.light {
   color-scheme: light;
-  --bg: #f3f7ff;
+  --bg: #edf3ff;
   --panel: #ffffff;
-  --panel-2: #edf3ff;
-  --text: #102038;
-  --muted: #48607c;
-  --accent: #6b5bff;
+  --panel-2: #f4f7ff;
+  --text: #15253d;
+  --muted: #4d627e;
+  --accent: #6f60ff;
   --accent-2: #10b9a8;
-  --shadow: rgba(67, 88, 119, 0.18);
+  --shadow: rgba(37, 54, 86, 0.12);
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; font-family: 'Poppins', 'Inter', sans-serif; background:
   radial-gradient(circle at top, rgba(124,92,255,0.08), transparent 28%),
   linear-gradient(180deg, #07111f 0%, #091423 45%, #040811 100%); color: var(--text); }
+:root.light html, :root.light body { background:
+  radial-gradient(circle at top, rgba(111, 96, 255, 0.10), transparent 30%),
+  linear-gradient(180deg, #f5f8ff 0%, #edf3ff 44%, #e8efff 100%); }
 body { min-height: 100vh; }
 
 a { text-decoration: none; color: inherit; }
 .container { width: min(1120px, calc(100vw - 2rem)); margin: 0 auto; }
 .site-header { position: sticky; top: 0; z-index: 10; background: rgba(7, 17, 31, 0.88); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.08); }
-:root.light .site-header { background: rgba(255, 255, 255, 0.9); border-bottom-color: rgba(16, 32, 56, 0.08); }
+:root.light .site-header { background: rgba(255, 255, 255, 0.92); border-bottom-color: rgba(16, 32, 56, 0.08); }
 .nav-wrap, .footer-wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 0; }
 .brand-logo-link { display: inline-flex; align-items: center; }
 .brand-logo, .hero-logo { display: block; width: auto; height: 48px; object-fit: contain; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.25)); }
@@ -77,8 +80,21 @@ p { color: var(--muted); line-height: 1.6; }
 .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 0.75rem; }
 .info-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 1rem; }
 .info-card h3 { margin: 0 0 0.25rem; font-size: 1rem; }
+.social-links-grid { display: grid; gap: 0.55rem; margin-top: 0.35rem; }
+.social-link { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.65rem 0.75rem; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); color: var(--text); font-weight: 600; transition: transform .15s ease, background .2s ease; }
+.social-link:hover { transform: translateY(-1px); background: rgba(124, 92, 255, 0.12); border-color: rgba(124, 92, 255, 0.25); }
+.social-link i { color: var(--accent-2); width: 1em; text-align: center; }
 .about-panel { min-height: 100%; }
-:root.light .card { border-color: rgba(16, 32, 56, 0.08); }
+:root.light .card { background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(244,247,255,0.98)); border-color: rgba(16, 32, 56, 0.08); box-shadow: 0 18px 34px rgba(37, 54, 86, 0.12); }
+:root.light .info-card, :root.light .mini-stat, :root.light .social-link { background: rgba(244, 247, 255, 0.95); border-color: rgba(16, 32, 56, 0.08); color: var(--text); }
+:root.light .social-link:hover { background: rgba(111, 96, 255, 0.10); border-color: rgba(111, 96, 255, 0.18); }
+:root.light .btn-secondary { background: rgba(111, 96, 255, 0.08); color: var(--text); border-color: rgba(111, 96, 255, 0.18); }
+:root.light .btn-secondary:hover { box-shadow: 0 10px 18px rgba(111, 96, 255, 0.14); }
+:root.light .mini-stat strong, :root.light .stat-box strong { color: #17253d; }
+:root.light .game-badge { background: rgba(111, 96, 255, 0.10); color: #5a4be4; }
+:root.light .status-pill { background: rgba(16, 185, 168, 0.10); color: #0d8b7c; }
+:root.light .member-chip { background: rgba(111, 96, 255, 0.10); color: #5a4be4; border-color: rgba(111, 96, 255, 0.18); }
+:root.light .member-tag { background: rgba(16, 185, 168, 0.10); color: #0d8b7c; border-color: rgba(16, 185, 168, 0.18); }
 .home-shell { display: grid; gap: 1rem; }
 .modern-hero { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1rem; padding: 1.2rem; overflow: hidden; position: relative; }
 .modern-hero::after { content: ''; position: absolute; inset: auto -14% -30% auto; width: 200px; height: 200px; background: radial-gradient(circle, rgba(124,92,255,0.18), transparent 60%); }
