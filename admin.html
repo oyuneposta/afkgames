@@ -20,21 +20,24 @@
         <a href="news.html">Haberler</a>
         <a href="about.html">Hakkımızda</a>
         <a href="contact.html">İletişim</a>
-        <a href="admin.html" class="active">Admin</a>
         <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Tema değiştir">🌙</button>
       </div>
     </nav>
   </header>
 
   <main class="container page-section">
-    <section class="page-intro">
-      <p class="eyebrow">Admin Panel</p>
-      <h1>Oyun ve haber yönetimi</h1>
-      <p>Firebase Realtime Database’e bağlandığınızda buradan içerikleri ekleyip silebilirsiniz.</p>
-      <p class="hint">Firebase yapılandırmasını <strong>script.js</strong> içindeki <strong>firebaseConfig</strong> alanına ekleyin.</p>
+    <section id="admin-lock" class="card admin-lock-card">
+      <p class="eyebrow">Erişim korumalı</p>
+      <h1>Admin paneline giriş</h1>
+      <p>Devam etmek için şifreyi girin.</p>
+      <div class="admin-password-box">
+        <input id="admin-password" type="password" placeholder="Şifre" />
+        <button id="unlock-admin" class="btn btn-primary" type="button">Giriş Yap</button>
+      </div>
+      <p id="admin-error" class="hint" hidden>Şifre yanlış. Lütfen tekrar deneyin.</p>
     </section>
 
-    <section class="grid admin-grid">
+    <section id="admin-content" hidden class="grid admin-grid">
       <article class="card">
         <h2>Yeni Oyun Ekle</h2>
         <form id="game-form" class="admin-form">
@@ -50,6 +53,7 @@
         <h2>Yeni Haber Ekle</h2>
         <form id="news-form" class="admin-form">
           <input type="text" id="news-title" placeholder="Haber başlığı" required />
+          <input type="text" id="news-category" placeholder="Kategori (örn. Güncelleme)" required />
           <input type="text" id="news-date" placeholder="Tarih (örn. 15 Haziran 2026)" required />
           <textarea id="news-desc" placeholder="Haber içeriği" required></textarea>
           <button type="submit" class="btn btn-primary">Ekle</button>

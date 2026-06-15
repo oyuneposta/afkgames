@@ -37,8 +37,18 @@ const teamMembers = [
 const demoGames = localGames;
 
 const demoNews = [
-  { id: 1, title: 'Yeni sürüm duyurusu', date: '15 Haziran 2026', description: 'Stüdyo, ilk büyük güncellemesini hazırlıyor.' },
-  { id: 2, title: 'Topluluk etkinliği', date: '20 Haziran 2026', description: 'Oyuncularımızla buluşmak için özel bir etkinlik düzenliyoruz.' }
+  {
+    title: 'Yeni sürüm duyurusu',
+    category: 'Güncelleme',
+    date: '15 Haziran 2026',
+    description: 'Stüdyo, ilk büyük güncellemesini hazırlıyor ve oyuncu geri bildirimlerine göre yeni içerikler ekliyor.'
+  },
+  {
+    title: 'Topluluk etkinliği',
+    category: 'Etkinlik',
+    date: '20 Haziran 2026',
+    description: 'Oyuncularımızla buluşmak için özel bir canlı yayın ve demo oturumu düzenliyoruz.'
+  }
 ];
 
 function renderCards(containerId, items, type) {
@@ -51,14 +61,14 @@ function renderCards(containerId, items, type) {
   }
 
   container.innerHTML = items.map(item => `
-    <article class="card ${type}-card">
+    <article class="card ${type}-card ${type === 'news' ? 'news-card' : ''}">
       <div class="game-topline">
-        <span class="game-badge">${type === 'game' ? item.tag : item.date}</span>
-        ${type === 'game' ? `<span class="status-pill">${item.status || 'Yeni'}</span>` : ''}
+        <span class="game-badge">${type === 'game' ? item.tag : (item.category || 'Haber')}</span>
+        ${type === 'game' ? `<span class="status-pill">${item.status || 'Yeni'}</span>` : `<span class="status-pill">${item.date || 'Yeni'}</span>`}
       </div>
       <h3>${item.title}</h3>
       <p>${item.description}</p>
-      ${type === 'game' ? '<button class="btn btn-secondary small">Detaylar</button>' : ''}
+      ${type === 'game' ? '<button class="btn btn-secondary small">Detaylar</button>' : '<span class="news-meta">AFK Games Studio</span>'}
     </article>
   `).join('');
 }
@@ -141,6 +151,7 @@ function setupForms() {
       e.preventDefault();
       db.ref('news').push({
         title: document.getElementById('news-title').value.trim(),
+        category: document.getElementById('news-category').value.trim(),
         date: document.getElementById('news-date').value.trim(),
         description: document.getElementById('news-desc').value.trim()
       }).then(() => {
@@ -149,6 +160,34 @@ function setupForms() {
       });
     });
   }
+}
+
+function initAdminGate() {
+  const passwordInput = document.getElementById('admin-password');
+  const unlockButton = document.getElementById('unlock-admin');
+  const lockBox = document.getElementById('admin-lock');
+  const adminContent = document.getElementById('admin-content');
+  const errorText = document.getElementById('admin-error');
+
+  if (!passwordInput || !unlockButton || !lockBox || !adminContent || !errorText) return;
+
+  const correctPassword = 'AFKGAMES2026';
+
+  const unlock = () => {
+    if (passwordInput.value === correctPassword) {
+      lockBox.hidden = true;
+      adminContent.hidden = false;
+      errorText.hidden = true;
+    } else {
+      errorText.hidden = false;
+      passwordInput.value = '';
+    }
+  };
+
+  unlockButton.addEventListener('click', unlock);
+  passwordInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') unlock();
+  });
 }
 
 function init() {
@@ -196,6 +235,7 @@ function init() {
     }
   }
 
+  initAdminGate();
   renderTeamCards();
   if (db) {
     setupForms();

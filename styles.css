@@ -54,6 +54,8 @@ p { color: var(--muted); line-height: 1.6; }
 .game-badge, .status-pill { display: inline-flex; align-items: center; padding: 0.35rem 0.6rem; border-radius: 999px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
 .game-badge { background: rgba(124, 92, 255, 0.12); color: #c8b5ff; }
 .status-pill { background: rgba(24, 210, 196, 0.12); color: #9bf3ea; }
+.news-card { border-left: 3px solid var(--accent-2); }
+.news-meta { color: var(--accent-2); font-weight: 700; font-size: 0.92rem; }
 .member-card { text-align: center; }
 .avatar { width: 52px; height: 52px; border-radius: 50%; margin: 0 auto 0.6rem; display: grid; place-items: center; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; font-weight: 800; font-size: 1.1rem; }
 .member-role { color: var(--accent-2); font-weight: 700; margin-top: -0.2rem; }
@@ -76,6 +78,9 @@ p { color: var(--muted); line-height: 1.6; }
 .admin-form textarea { min-height: 90px; resize: vertical; }
 .mini-list { display: grid; gap: 0.5rem; margin-top: 1rem; }
 .mini-item { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; padding: 0.65rem 0.75rem; background: rgba(255,255,255,0.04); border-radius: 14px; }
+.admin-lock-card { max-width: 680px; margin-bottom: 1rem; }
+.admin-password-box { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.75rem; }
+.admin-password-box input { flex: 1 1 240px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); color: #fff; padding: 0.75rem 0.9rem; font: inherit; }
 .hint { color: #ffd76e; }
 .site-footer { border-top: 1px solid rgba(255,255,255,0.08); background: rgba(4, 8, 17, 0.92); }
 
