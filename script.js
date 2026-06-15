@@ -8,8 +8,9 @@ const firebaseConfig = {
   appId: "YOUR_APP_ID"
 };
 
-const app = firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+const hasFirebase = typeof firebase !== 'undefined' && firebase.apps;
+const app = hasFirebase && firebase.apps.length ? firebase.app() : (hasFirebase ? firebase.initializeApp(firebaseConfig) : null);
+const db = app ? firebase.database() : null;
 
 const localGames = [
   {
@@ -80,7 +81,7 @@ function renderAdminLists() {
   const gameList = document.getElementById('game-list');
   const newsList = document.getElementById('news-admin-list');
 
-  if (gameList) {
+  if (gameList && db) {
     db.ref('games').once('value').then(snapshot => {
       const items = snapshot.val() || {};
       const list = Object.entries(items).map(([id, item]) => `
@@ -93,7 +94,7 @@ function renderAdminLists() {
     });
   }
 
-  if (newsList) {
+  if (newsList && db) {
     db.ref('news').once('value').then(snapshot => {
       const items = snapshot.val() || {};
       const list = Object.entries(items).map(([id, item]) => `
@@ -108,6 +109,7 @@ function renderAdminLists() {
 }
 
 function handleDelete(event) {
+  if (!db) return;
   const target = event.target.closest('[data-delete]');
   if (!target) return;
   const path = target.getAttribute('data-delete');
@@ -120,7 +122,7 @@ function setupForms() {
   const gameForm = document.getElementById('game-form');
   const newsForm = document.getElementById('news-form');
 
-  if (gameForm) {
+  if (gameForm && db) {
     gameForm.addEventListener('submit', (e) => {
       e.preventDefault();
       db.ref('games').push({
@@ -134,7 +136,7 @@ function setupForms() {
     });
   }
 
-  if (newsForm) {
+  if (newsForm && db) {
     newsForm.addEventListener('submit', (e) => {
       e.preventDefault();
       db.ref('news').push({
@@ -173,22 +175,32 @@ function init() {
   }
 
   if (document.getElementById('games-list')) {
-    db.ref('games').once('value').then(snapshot => {
-      const items = snapshot.val();
-      renderCards('games-list', items ? Object.values(items) : demoGames, 'game');
-    }).catch(() => renderCards('games-list', demoGames, 'game'));
+    if (db) {
+      db.ref('games').once('value').then(snapshot => {
+        const items = snapshot.val();
+        renderCards('games-list', items ? Object.values(items) : demoGames, 'game');
+      }).catch(() => renderCards('games-list', demoGames, 'game'));
+    } else {
+      renderCards('games-list', demoGames, 'game');
+    }
   }
 
   if (document.getElementById('news-list')) {
-    db.ref('news').once('value').then(snapshot => {
-      const items = snapshot.val();
-      renderCards('news-list', items ? Object.values(items) : demoNews, 'news');
-    }).catch(() => renderCards('news-list', demoNews, 'news'));
+    if (db) {
+      db.ref('news').once('value').then(snapshot => {
+        const items = snapshot.val();
+        renderCards('news-list', items ? Object.values(items) : demoNews, 'news');
+      }).catch(() => renderCards('news-list', demoNews, 'news'));
+    } else {
+      renderCards('news-list', demoNews, 'news');
+    }
   }
 
   renderTeamCards();
-  setupForms();
-  renderAdminLists();
+  if (db) {
+    setupForms();
+    renderAdminLists();
+  }
   document.addEventListener('click', handleDelete);
 }
 
