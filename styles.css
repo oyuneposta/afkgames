@@ -78,12 +78,12 @@ p { color: var(--muted); line-height: 1.6; }
 .member-role { color: var(--accent-2); font-weight: 700; margin: 0.05rem 0 0; font-size: 0.95rem; }
 .member-note { color: var(--muted); font-size: 0.95rem; margin: 0; }
 :root.light .member-card { background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(237, 243, 255, 0.98)); border-color: rgba(107, 91, 255, 0.16); }
-.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; margin-top: 0.5rem; }
-.info-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 0.85rem; min-height: 0; }
-.info-card h3 { margin: 0 0 0.15rem; font-size: 0.95rem; }
-.info-card p { font-size: 0.95rem; margin: 0; }
-.social-links-grid { display: grid; gap: 0.45rem; margin-top: 0.2rem; }
-.social-link { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.45rem 0.55rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); color: var(--text); font-weight: 600; font-size: 0.92rem; transition: transform .25s cubic-bezier(.2,.8,.2,1), background .25s ease, border-color .25s ease; }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.45rem; margin-top: 0.25rem; }
+.info-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 0.55rem; min-height: 0; }
+.info-card h3 { margin: 0 0 0.05rem; font-size: 0.82rem; }
+.info-card p { font-size: 0.85rem; margin: 0; line-height: 1.35; }
+.social-links-grid { display: grid; gap: 0.35rem; margin-top: 0.12rem; }
+.social-link { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.38rem 0.45rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); color: var(--text); font-weight: 600; font-size: 0.88rem; transition: transform .25s cubic-bezier(.2,.8,.2,1), background .25s ease, border-color .25s ease; }
 .social-link:hover { transform: translateY(-3px) scale(1.02); background: rgba(124, 92, 255, 0.12); border-color: rgba(124, 92, 255, 0.25); }
 .social-link i { color: var(--accent-2); width: 1em; text-align: center; }
 .about-panel { min-height: 100%; }
@@ -174,7 +174,32 @@ p { color: var(--muted); line-height: 1.6; }
   50% { box-shadow: 0 12px 28px rgba(124, 92, 255, 0.22); }
 }
 
+/* Sayfa geçiş animasyonu */
+body { opacity: 0; animation: pageFadeIn .45s ease forwards; }
+body.page-leaving { opacity: 1; animation: pageFadeOut .35s ease forwards; }
+
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pageFadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-8px); }
+}
+
+/* Admin: Site İçeriği formunda iki sütun + kısa alanlar */
+.admin-form.two-cols { grid-template-columns: repeat(2, 1fr); }
+.admin-form.two-cols textarea,
+.admin-form.two-cols button { grid-column: 1 / -1; }
+#site-email, #site-phone { max-width: 220px; }
+
+/* Admin giriş kutusunda şifre alanı kısaltıldı */
+.admin-password-box input { flex: 0 1 200px; }
+
 @media (max-width: 880px) {
+  .admin-form.two-cols { grid-template-columns: 1fr; }
+  #site-email, #site-phone { max-width: 100%; }
   .nav-links { display: none; position: absolute; right: 1rem; top: 3.6rem; flex-direction: column; align-items: stretch; padding: 0.75rem; border-radius: 18px; background: rgba(7,17,31,0.98); border: 1px solid rgba(255,255,255,0.08); }
   :root.light .nav-links { background: rgba(255,255,255,0.98); }
   .nav-links.open { display: flex; }

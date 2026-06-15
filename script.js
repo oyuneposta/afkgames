@@ -350,6 +350,17 @@ function renderPageContent() {
   }
 }
 
+function smoothScrollTo(hash) {
+  const target = document.querySelector(hash);
+  if (!target) return;
+  const top = target.getBoundingClientRect().top + window.pageYOffset - 84;
+  if ('scrollBehavior' in document.documentElement.style) {
+    window.scrollTo({ top, behavior: 'smooth' });
+  } else {
+    window.scrollTo(0, top);
+  }
+}
+
 function init() {
   document.querySelectorAll('#year').forEach(el => el.textContent = new Date().getFullYear());
 
@@ -372,6 +383,28 @@ function init() {
   if (menuBtn && navLinks) {
     menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
   }
+
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (event) => {
+      const hash = link.getAttribute('href');
+      if (!hash || hash === '#') return;
+      event.preventDefault();
+      smoothScrollTo(hash);
+      navLinks?.classList.remove('open');
+    });
+  });
+
+  // Sayfalar arası yumuşak geçiş (fade)
+  document.querySelectorAll('a[href]').forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || link.target === '_blank') return;
+
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      document.body.classList.add('page-leaving');
+      setTimeout(() => { window.location.href = href; }, 320);
+    });
+  });
 
   renderPageContent();
 
