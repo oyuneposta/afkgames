@@ -1,58 +1,15 @@
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  databaseURL: "YOUR_DATABASE_URL",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyCUScDnCVhZNkX1ZVooU0Og_Zi8faE_kHM",
+  authDomain: "afkgames.firebaseapp.com",
+  projectId: "afkgames",
+  storageBucket: "afkgames.firebasestorage.app",
+  messagingSenderId: "866864941891",
+  appId: "1:866864941891:web:2cd2af124b000dbf96fdf6"
 };
 
 const hasFirebase = typeof firebase !== 'undefined' && firebase.apps;
 const app = hasFirebase && firebase.apps.length ? firebase.app() : (hasFirebase ? firebase.initializeApp(firebaseConfig) : null);
-const db = app ? firebase.database() : null;
-
-const localGames = [
-  {
-    title: 'Skybound Legends',
-    tag: 'Aksiyon • Çok Oyunculu',
-    platform: 'PC / Web',
-    image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=900&q=80',
-    link: '#',
-    status: 'published',
-    description: 'Hızlı tempolu savaşlar, açık dünya keşfi ve takım taktikleriyle dolu bir proje.'
-  },
-  {
-    title: 'Moonlight Quest',
-    tag: 'RPG • Hikâye',
-    platform: 'Mobil',
-    image: 'https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=900&q=80',
-    link: '#',
-    status: 'draft',
-    description: 'Karakter gelişimi, büyüleyici hikâye ve otomatik savaş sistemiyle oyuncuyu içine çeken bir dünya.'
-  }
-];
-
-const localNews = [
-  {
-    title: 'Yeni sürüm duyurusu',
-    category: 'Güncelleme',
-    date: '15 Haziran 2026',
-    image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=900&q=80',
-    link: '#',
-    status: 'published',
-    description: 'Stüdyo, ilk büyük güncellemesini hazırlıyor ve oyuncu geri bildirimlerine göre yeni içerikler ekliyor.'
-  },
-  {
-    title: 'Topluluk etkinliği',
-    category: 'Etkinlik',
-    date: '20 Haziran 2026',
-    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80',
-    link: '#',
-    status: 'published',
-    description: 'Oyuncularımızla buluşmak için özel bir canlı yayın ve demo oturumu düzenliyoruz.'
-  }
-];
+const db = app ? firebase.firestore() : null;
 
 const defaultSite = {
   title: 'AFK Games Studio, oyun dünyasına yeni projeler kazandıran bağımsız ekip.',
@@ -73,9 +30,6 @@ const teamMembers = [
   { name: 'Furkan Çifcioğlu', role: 'Designer', note: 'Arayüz ve oyuncu deneyimi tasarımı.' },
   { name: 'İbrahim Kerim Kaplan', role: 'Designer', note: 'Görsel bütünlük ve tasarım yönü.' }
 ];
-
-const demoGames = localGames;
-const demoNews = localNews;
 
 let editingGameId = null;
 let editingNewsId = null;
@@ -118,11 +72,10 @@ function renderTeamCards() {
   `).join('');
 }
 
-function getItemsFromDb(path, fallback) {
+function getItemsFromDb(path, fallback = []) {
   if (!db) return Promise.resolve(fallback);
-  return db.ref(path).once('value').then(snapshot => {
-    const data = snapshot.val();
-    return data ? Object.entries(data).map(([id, item]) => ({ id, ...item })) : fallback;
+  return db.collection(path).get().then(snapshot => {
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   }).catch(() => fallback);
 }
 
@@ -132,7 +85,7 @@ function renderAdminLists() {
   const gameFilter = document.getElementById('game-filter');
   const newsFilter = document.getElementById('news-filter');
 
-  getItemsFromDb('games', demoGames).then(items => {
+  getItemsFromDb('games').then(items => {
     const filtered = (items || []).filter(item => (item.title || '').toLowerCase().includes((gameFilter?.value || '').toLowerCase()));
     if (gameList) {
       gameList.innerHTML = filtered.length ? filtered.map(item => `
@@ -150,7 +103,7 @@ function renderAdminLists() {
     }
   });
 
-  getItemsFromDb('news', demoNews).then(items => {
+  getItemsFromDb('news').then(items => {
     const filtered = (items || []).filter(item => (item.title || '').toLowerCase().includes((newsFilter?.value || '').toLowerCase()));
     if (newsList) {
       newsList.innerHTML = filtered.length ? filtered.map(item => `
@@ -175,7 +128,12 @@ function handleDelete(event) {
   if (!target) return;
   const path = target.getAttribute('data-delete');
   if (path) {
-    db.ref(path).remove().then(() => renderAdminLists());
+    const [collection, id] = path.split('/');
+    if (db && collection && id) {
+      db.collection(collection).doc(id).delete()
+        .then(() => renderAdminLists())
+        .catch(error => { console.error('Delete failed:', error); alert('Silme işlemi başarısız oldu. Firestore kurallarını kontrol edin.'); });
+    }
   }
 }
 
@@ -186,7 +144,7 @@ function handleEdit(event) {
   const [type, id] = path.split('/');
 
   if (type === 'games') {
-    getItemsFromDb('games', demoGames).then(items => {
+    getItemsFromDb('games').then(items => {
       const item = items.find(entry => entry.id === id);
       if (!item) return;
       editingGameId = id;
@@ -202,7 +160,7 @@ function handleEdit(event) {
   }
 
   if (type === 'news') {
-    getItemsFromDb('news', demoNews).then(items => {
+    getItemsFromDb('news').then(items => {
       const item = items.find(entry => entry.id === id);
       if (!item) return;
       editingNewsId = id;
@@ -248,8 +206,12 @@ function setupForms() {
         description: document.getElementById('game-desc').value.trim()
       };
       if (!data.title || !data.description) return;
-      const action = editingGameId ? db.ref('games/' + editingGameId).update(data) : db.ref('games').push(data);
-      action.then(() => { gameForm.reset(); resetGameForm(); renderAdminLists(); renderPageContent(); });
+      const action = editingGameId
+        ? db.collection('games').doc(editingGameId).set(data, { merge: true })
+        : db.collection('games').add(data);
+      action
+        .then(() => { gameForm.reset(); resetGameForm(); renderAdminLists(); renderPageContent(); })
+        .catch(error => { console.error('Games save failed:', error); alert('Oyun kaydedilemedi. Firestore kurallarını kontrol edin.'); });
     });
   }
 
@@ -266,8 +228,12 @@ function setupForms() {
         description: document.getElementById('news-desc').value.trim()
       };
       if (!data.title || !data.description) return;
-      const action = editingNewsId ? db.ref('news/' + editingNewsId).update(data) : db.ref('news').push(data);
-      action.then(() => { newsForm.reset(); resetNewsForm(); renderAdminLists(); renderPageContent(); });
+      const action = editingNewsId
+        ? db.collection('news').doc(editingNewsId).set(data, { merge: true })
+        : db.collection('news').add(data);
+      action
+        .then(() => { newsForm.reset(); resetNewsForm(); renderAdminLists(); renderPageContent(); })
+        .catch(error => { console.error('News save failed:', error); alert('Haber kaydedilemedi. Firestore kurallarını kontrol edin.'); });
     });
   }
 
@@ -281,9 +247,15 @@ function setupForms() {
         phone: document.getElementById('site-phone').value.trim() || defaultSite.phone,
         about: document.getElementById('site-about').value.trim() || defaultSite.about
       };
-      if (db) db.ref('site').set(data); else localStorage.setItem('afk-site', JSON.stringify(data));
-      renderSiteContent(data);
-      alert('Site içeriği kaydedildi.');
+      if (db) {
+        db.collection('site').doc('main').set(data, { merge: true })
+          .then(() => { renderSiteContent(data); alert('Site içeriği kaydedildi.'); })
+          .catch(error => { console.error('Site save failed:', error); alert('Site içeriği kaydedilemedi. Firestore kurallarını kontrol edin.'); });
+      } else {
+        localStorage.setItem('afk-site', JSON.stringify(data));
+        renderSiteContent(data);
+        alert('Site içeriği kaydedildi.');
+      }
     });
   }
 
@@ -332,15 +304,15 @@ function renderSiteContent(data = null) {
 
 function renderPageContent() {
   if (db) {
-    getItemsFromDb('games', demoGames).then(items => renderCards('games-list', items, 'game'));
-    getItemsFromDb('news', demoNews).then(items => renderCards('news-list', items, 'news'));
-    db.ref('site').once('value').then(snapshot => {
-      const site = snapshot.val();
+    getItemsFromDb('games').then(items => renderCards('games-list', items, 'game'));
+    getItemsFromDb('news').then(items => renderCards('news-list', items, 'news'));
+    db.collection('site').doc('main').get().then(snapshot => {
+      const site = snapshot.exists ? snapshot.data() : null;
       if (site) renderSiteContent(site);
     }).catch(() => renderSiteContent(defaultSite));
   } else {
-    renderCards('games-list', demoGames, 'game');
-    renderCards('news-list', demoNews, 'news');
+    renderCards('games-list', [], 'game');
+    renderCards('news-list', [], 'news');
     renderSiteContent();
   }
 }
