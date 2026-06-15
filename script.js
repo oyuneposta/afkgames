@@ -389,22 +389,42 @@ function init() {
       const hash = link.getAttribute('href');
       if (!hash || hash === '#') return;
       event.preventDefault();
-      smoothScrollTo(hash);
       navLinks?.classList.remove('open');
+
+      const main = document.querySelector('main');
+      if (main && hash !== '#top') {
+        main.classList.add('section-fade');
+        setTimeout(() => {
+          smoothScrollTo(hash);
+          setTimeout(() => main.classList.remove('section-fade'), 50);
+        }, 180);
+      } else {
+        smoothScrollTo(hash);
+      }
     });
   });
 
   // Sayfalar arası yumuşak geçiş (fade)
   document.querySelectorAll('a[href]').forEach(link => {
     const href = link.getAttribute('href');
-    if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || link.target === '_blank') return;
+    if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || link.target === '_blank') return;
+    if (href.startsWith('#')) return; // aynı sayfa içi link, smooth scroll zaten var
 
     link.addEventListener('click', (event) => {
       event.preventDefault();
       document.body.classList.add('page-leaving');
-      setTimeout(() => { window.location.href = href; }, 320);
+      setTimeout(() => { window.location.href = href; }, 280);
     });
   });
+
+  // Sayfa bir bölüme (#bölüm) gitmek için açıldıysa, yumuşak şekilde o bölüme kaydır
+  const scrollTarget = sessionStorage.getItem('afk-scroll-target');
+  if (scrollTarget) {
+    sessionStorage.removeItem('afk-scroll-target');
+    requestAnimationFrame(() => {
+      setTimeout(() => smoothScrollTo(scrollTarget), 150);
+    });
+  }
 
   renderPageContent();
 

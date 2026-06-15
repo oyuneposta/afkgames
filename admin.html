@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+  <script>
+    if (window.location.hash) {
+      sessionStorage.setItem('afk-scroll-target', window.location.hash);
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AFK Games Studio | Admin Panel</title>
