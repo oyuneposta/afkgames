@@ -28,8 +28,8 @@
   <main class="container page-section">
     <section class="hero card">
       <p class="eyebrow">AFK Games Studio</p>
-      <h1>Yeni nesil oyun deneyimleri için güçlü bir stüdyo.</h1>
-      <p>Oyunlarımız, haberlerimiz, hakkımızda ve iletişim sayfalarımızla AFK Games Studio’nun dijital yüzünü oluşturduk.</p>
+      <h1 id="site-title-preview">Yeni nesil oyun deneyimleri için güçlü bir stüdyo.</h1>
+      <p id="site-subtitle-preview">Oyunlarımız, haberlerimiz, hakkımızda ve iletişim sayfalarımızla AFK Games Studio’nun dijital yüzünü oluşturduk.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#games">Oyunlarımızı Keşfet</a>
         <a class="btn btn-secondary" href="#news">Son Haberler</a>
@@ -59,23 +59,46 @@
     </section>
 
     <section id="about" class="section-block grid cards-grid">
-      <article class="card">
+      <article class="card about-panel">
         <p class="eyebrow">Hakkımızda</p>
         <h2>AFK Games Studio</h2>
-        <p>Yaratıcı fikirler, güçlü ekip çalışması ve oyuncu odaklı tasarımla büyüyen bir oyun stüdyosuyuz.</p>
+        <p id="site-about-preview">AFK Games Studio; oyun geliştirme, hikâye anlatımı, grafik tasarım ve topluluk yönetimi alanlarında yenilikçi projeler üretir. Amacımız oyunculara unutulmaz deneyimler yaşatmak ve güçlü bir oyun topluluğu kurmaktır.</p>
       </article>
-      <article class="card">
-        <p class="eyebrow">Kadro</p>
-        <h2>Ekibimiz</h2>
-        <p>Oyun tasarımı, grafik ve teknoloji ekipleriyle projelerimizi ileri taşıyoruz.</p>
+      <article class="card about-panel">
+        <p class="eyebrow">Ekibimiz</p>
+        <h2>Birlikte büyüyoruz</h2>
+        <p>Yazılım, tasarım, hikâye ve proje yönetimi alanlarında çalışan ekiplerimizle projelerimizi sürekli geliştiriyoruz.</p>
       </article>
+    </section>
+
+    <section class="section-block">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Ekibimiz</p>
+          <h2>Kadro üyelerimiz</h2>
+        </div>
+        <p class="section-note">Her alanın uzmanlarıyla çalışan, oyuncu odaklı bir yapı sunuyoruz.</p>
+      </div>
+      <div class="grid cards-grid" id="team-list"></div>
     </section>
 
     <section id="contact" class="section-block card contact-card">
       <p class="eyebrow">İletişim</p>
       <h2>Bizimle iletişime geçin</h2>
-      <p>E-posta: hello@afkgamesstudio.com</p>
-      <p>Telefon: +90 555 123 45 67</p>
+      <div class="contact-grid">
+        <article class="info-card">
+          <h3>E-posta</h3>
+          <p id="site-email-preview">hello@afkgamesstudio.com</p>
+        </article>
+        <article class="info-card">
+          <h3>Telefon</h3>
+          <p id="site-phone-preview">+90 555 123 45 67</p>
+        </article>
+        <article class="info-card">
+          <h3>Lokasyon</h3>
+          <p>İstanbul / Türkiye</p>
+        </article>
+      </div>
     </section>
   </main>
 
